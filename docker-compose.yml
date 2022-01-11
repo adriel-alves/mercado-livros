@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb:10.5.8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mercado-livros
+    ports:
+      - "3306:3306"
+    volumes:
+      - /Users/adrielalves/workspace/docker/MySql:/var/lib/mysql
+    networks:
+      - mysql-compose-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - mysql-compose-network
+
+networks:
+  mysql-compose-network:
+    driver: bridge
